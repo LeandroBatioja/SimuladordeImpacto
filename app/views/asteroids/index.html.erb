@@ -1,0 +1,36 @@
+<h1>🌍 Lista de Asteroides Registrados</h1>
+
+<% if @asteroids.any? %>
+  <table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Magnitud Absoluta</th>
+        <th>Diámetro (km)</th>
+        <th>Peligroso</th>
+        <th>Próximos Acercamientos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @asteroids.each do |asteroid| %>
+        <tr>
+          <td><%= asteroid.name %></td>
+          <td><%= asteroid.absolute_magnitude %></td>
+          <td><%= asteroid.estimated_diameter_min %> - <%= asteroid.estimated_diameter_max %></td>
+          <td><%= asteroid.is_potentially_hazardous ? "⚠️ Sí" : "No" %></td>
+          <td>
+            <% asteroid.close_approaches.each do |approach| %>
+              <div>
+                <b><%= approach.close_approach_date %></b> –  
+                Vel: <%= approach.relative_velocity_kms %> km/s –  
+                Dist: <%= approach.miss_distance_km %> km
+              </div>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No hay asteroides registrados todavía 🚀.</p>
+<% end %>
