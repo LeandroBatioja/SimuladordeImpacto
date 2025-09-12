@@ -1,0 +1,27 @@
+<h1>✏️ Editar Asteroide</h1>
+
+<%= form_with(model: @asteroid, local: true) do |form| %>
+  <p>
+    <%= form.label :name, "Nombre" %><br>
+    <%= form.text_field :name %>
+  </p>
+
+  <p>
+    <%= form.label :diameter, "Diámetro (km)" %><br>
+    <%= form.number_field :diameter, step: 0.01 %>
+  </p>
+
+  <p>
+    <%= form.label :velocity, "Velocidad (km/s)" %><br>
+    <%= form.number_field :velocity, step: 0.01 %>
+  </p>
+
+  <p>
+    <%= form.label :impact_probability, "Probabilidad de Impacto (%)" %><br>
+    <%= form.number_field :impact_probability, step: 0.01 %>
+  </p>
+
+  <%= form.submit "Actualizar Asteroide" %>
+<% end %>
+
+<%= link_to "⬅ Volver", asteroids_path %>

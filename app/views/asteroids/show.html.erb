@@ -1,0 +1,8 @@
+<h1>🪐 <%= @asteroid.name %></h1>
+
+<p><strong>Diámetro:</strong> <%= @asteroid.diameter %> km</p>
+<p><strong>Velocidad:</strong> <%= @asteroid.velocity %> km/s</p>
+<p><strong>Probabilidad de Impacto:</strong> <%= @asteroid.impact_probability %> %</p>
+
+<%= link_to "✏️ Editar", edit_asteroid_path(@asteroid) %> |
+<%= link_to "⬅ Volver", asteroids_path %>

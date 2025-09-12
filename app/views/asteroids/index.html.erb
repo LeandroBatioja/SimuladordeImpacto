@@ -1,36 +1,32 @@
-<h1>🌍 Lista de Asteroides Registrados</h1>
+<h1>🌍 Lista de Asteroides Cercanos</h1>
 
-<% if @asteroids.any? %>
-  <table border="1" cellpadding="5" cellspacing="0">
-    <thead>
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Diámetro (km)</th>
+      <th>Velocidad (km/s)</th>
+      <th>Probabilidad de Impacto (%)</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @asteroids.each do |asteroid| %>
       <tr>
-        <th>Nombre</th>
-        <th>Magnitud Absoluta</th>
-        <th>Diámetro (km)</th>
-        <th>Peligroso</th>
-        <th>Próximos Acercamientos</th>
+        <td><%= asteroid.name %></td>
+        <td><%= asteroid.diameter %></td>
+        <td><%= asteroid.velocity %></td>
+        <td><%= asteroid.impact_probability %></td>
+        <td>
+          <%= link_to "Ver", asteroid_path(asteroid) %> |
+          <%= link_to "Editar", edit_asteroid_path(asteroid) %> |
+          <%= link_to "Eliminar", asteroid_path(asteroid), method: :delete, data: { confirm: "¿Seguro?" } %>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-      <% @asteroids.each do |asteroid| %>
-        <tr>
-          <td><%= asteroid.name %></td>
-          <td><%= asteroid.absolute_magnitude %></td>
-          <td><%= asteroid.estimated_diameter_min %> - <%= asteroid.estimated_diameter_max %></td>
-          <td><%= asteroid.is_potentially_hazardous ? "⚠️ Sí" : "No" %></td>
-          <td>
-            <% asteroid.close_approaches.each do |approach| %>
-              <div>
-                <b><%= approach.close_approach_date %></b> –  
-                Vel: <%= approach.relative_velocity_kms %> km/s –  
-                Dist: <%= approach.miss_distance_km %> km
-              </div>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No hay asteroides registrados todavía 🚀.</p>
-<% end %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to "➕ Nuevo Asteroide", new_asteroid_path %>
